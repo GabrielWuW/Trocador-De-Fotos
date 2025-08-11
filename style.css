@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+:root {
+    --background: url('img/Placeholder.svg');
+}
+
 body {
     display: flex;
     justify-content: center;
@@ -18,12 +22,19 @@ body {
     align-items: center;
     gap: 3vh;
     padding-top: 5vh;
+
 }
 
-.container img {
+.imagem {
     border-radius: 2vh;
     border: 3px solid red;
     width: 80vh;
+    height: 50vh;
+    background-image: var(--background);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    transition: 0.2s;
 }
 
 .container input {
@@ -38,6 +49,7 @@ body {
     text-align: center;
     background-color: rgb(38, 38, 38);
 }
+
 .desativo {
     color: green;
     border: 3px solid green;

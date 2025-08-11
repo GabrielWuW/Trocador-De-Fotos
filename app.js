@@ -1,16 +1,13 @@
 const btnPesquisar = document.getElementById('btnPesquisar');
 const btnAutomatico = document.getElementById('btnAutomatico');
 
-const img = document.getElementById('imagem');
 let automatico = false;
 
 const extensoes = ['jpg', 'jpeg', 'webp'];
 
 function tentaMudarImagem(nomeArquivo, index) {
-
-    //Tratamento caso a imagem não seja encontrada
     if (index >= extensoes.length) {
-        img.src = 'img/Placeholder.svg';
+        document.documentElement.style.setProperty('--background', 'url(img/Placeholder.svg)');
         alert('Não encontrei sua imagem :(');
         return;
     }
@@ -18,11 +15,17 @@ function tentaMudarImagem(nomeArquivo, index) {
     let extensaoAtual = extensoes[index];
     let url = `img/${nomeArquivo}.${extensaoAtual}`;
 
-    img.onerror = function () {
-        tentaMudarImagem(nomeArquivo, index + 1);
-    }
+    let tempImg = new Image();
 
-    img.src = url;
+    tempImg.onload = function () {
+        document.documentElement.style.setProperty('--background', `url(${url})`);
+    };
+
+    tempImg.onerror = function () {
+        tentaMudarImagem(nomeArquivo, index + 1);
+    };
+
+    tempImg.src = url;
 }
 
 function mudarImagem() {
@@ -60,14 +63,12 @@ function mudarImagemAutomatico(index) {
 
 btnAutomatico.addEventListener('click', () => {
     if (!automatico) {
-        mudarImagemAutomatico(0);
         btnAutomatico.innerText = 'Parar';
         automatico = true;
+        mudarImagemAutomatico(0);
     } else {
-        img.src = 'img/Placeholder.svg';
+        document.documentElement.style.setProperty('--background', 'url(img/Placeholder.svg)');
         btnAutomatico.innerText = 'Automático';
         automatico = false;
     }
-
-    mudarImagemAutomatico(0);
 });
