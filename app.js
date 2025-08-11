@@ -1,35 +1,31 @@
 const btnPesquisar = document.getElementById('btnPesquisar');
 const img = document.getElementById('imagem');
+const campoPesquisa = document.getElementById('campoPesquisa').value;
 
+const extensoes = ['jpg', 'jpeg', 'webp'];
 
-function mudarImagem() {
-    extensao = '.jpg'
-    const campoPesquisa = document.getElementById('campoPesquisa').value;
-    img.src = "img/" + campoPesquisa + extensao;
-    console.clear();
+function tentaMudarImagem(nomeArquivo, index) {
+
+    //Tratamento caso a imagem não seja encontrada
+    if (index >= extensoes.length) {
+        img.src = 'img/Placeholder.svg';
+        alert('Não encontrei sua imagem :(');
+        return;
+    }
+
+    let extensaoAtual = extensoes[index];
+    let url = `img/${nomeArquivo}.${extensaoAtual}`;
 
     img.onerror = function() {
-            extensao = '.jpeg'
-            const campoPesquisa = document.getElementById('campoPesquisa').value;
-            img.src = "img/" + campoPesquisa + extensao;
-                console.clear();
-            img.onerror = function() {
-                extensao = '.webp'
-                const campoPesquisa = document.getElementById('campoPesquisa').value;
-                img.src = "img/" + campoPesquisa + extensao;
-
-                img.onerror = function() {
-                    extensao = '.svg'
-                    img.src = "img/" + 'Placeholder' + extensao;
-                    console.clear();
-                }
-                console.clear();
-
-                
-            }
-        
+        tentaMudarImagem(nomeArquivo, index + 1);
     }
     
+    img.src = url;
+}
+
+function mudarImagem() {
+    let nomeArquivo = document.getElementById('campoPesquisa').value;
+    tentaMudarImagem(nomeArquivo, 0);
 }
 
 btnPesquisar.addEventListener('click', mudarImagem);
