@@ -38,9 +38,13 @@ body {
     text-align: center;
     background-color: rgb(38, 38, 38);
 }
+.desativo {
+    color: green;
+    border: 3px solid green;
+}
 
-.container button {
-    width: 40vh;
+.container #btnPesquisar {
+    width: 30vh;
     font-size: 2rem;
     font-family: comic sans ms;
     font-weight: bolder;
@@ -51,4 +55,23 @@ body {
     padding: 1vh;
     text-align: center;
     cursor: pointer;
+}
+
+.container #btnAutomatico {
+    width: 30vh;
+    font-size: 2rem;
+    font-family: comic sans ms;
+    font-weight: bolder;
+    color: green;
+    background-color: rgb(38, 38, 38);
+    border: 3px solid green;
+    border-radius: 2vh;
+    padding: 1vh;
+    text-align: center;
+    cursor: pointer;
+}
+
+.form {
+    display: flex;
+    gap: 3vh;
 }
